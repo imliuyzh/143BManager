@@ -1,5 +1,5 @@
-# 143BManager
-This project develops a simple process and resource manager. The manager provides the basic operations invoked by processes to create and destroy processes, and to request and release resources. A manually invoked timeout function mimics the behavior of preemptive scheduling. 
+# ICSOSProcessManager
+A simple process and resource manager provides the basic operations invoked by processes to create and destroy processes, and to request and release resources. A manually invoked timeout function mimics the behavior of preemptive scheduling. 
 
 ## Background
 ### Process
@@ -10,7 +10,7 @@ A process can be in one of three states: ready, running, blocked. It typically c
 
 Each process is represented by a data structure called the process control block (PCB). The PCBs are organized as a fixed-size array, PCB[n], where n is the maximum number of processes that can be created. Each process is uniquely identified by the PCB index:
 
-<img src="https://i.ibb.co/ZcrjMhr/ch1img2v2.png" />
+<img src="https://i.ibb.co/r6fTVsX/3.png" width="600" />
 <br />
 
 Each PCB only consists of the following fields:
@@ -58,3 +58,6 @@ These instructions will get you a copy of the project up and running on your loc
 | ```rl <r> <k>```  | release() | Free ```k``` units of resource ```r```. |
 | ```to```  | timeout() | Change the current running process. |
 | ```in```  | init() | Initialize/reset this program. |
+
+## Acknowledgments
+This project is originally developed for UC Irvine's CS 143B taught by Prof. Lubomir Bic. Its prerequisite is Prof. Nalini Venkatasubramanian's CS 143A. Without their classes, I cannot start this project.
