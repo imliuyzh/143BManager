@@ -28,7 +28,7 @@ Each PCB only consists of the following fields:
 ### Resource
 Processes may request, acquire, and later release a fixed set of resources. When a process requests a resource that is unavailable, the process becomes blocked.
 
-Each resource is represented by a data structure called the resource control block (RCB). Analogous to the PCBs, the RCBs are organized as a fixed-size array, RCB[m], where m is the number of resources in the system. Each resource is uniquely identified by the RCB index. Each RCB consists only of the following fields, organized as a structure:
+Each resource is represented by a data structure called the resource control block (RCB). Analogous to the PCBs, the RCBs are organized as a fixed-size array, RCB[m], where m is the number of resource types in the system. Each resource is uniquely identified by the RCB index. Each RCB consists only of the following fields, organized as a structure:
 
 <img src="https://i.ibb.co/pd5x5t1/2.png" width="600" />
 <br />
