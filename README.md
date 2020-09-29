@@ -45,9 +45,9 @@ These instructions will get you a copy of the project up and running on your loc
 1. Clone/download this repository to your local machine
 2. Navigate to the folder in your console
 3. Type ```make compile``` to compile the program
-4. Type ```make dev``` to run the program
-5. Press ```Ctrl+C``` to terminate the program
-6. Type ```make clean``` to remove all the trace of this program in your device
+4. Type ```./icsospm``` to start the program
+5. Press ```???``` to terminate the program
+6. Type ```make clean``` to remove all traces in your device
 
 ### Commands
 | Shell Command  | Function | Description |
