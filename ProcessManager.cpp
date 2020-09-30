@@ -12,6 +12,7 @@ void ProcessManager::init()
     std::shared_ptr<Process> process{new Process(-1, 0)};
     pcb[0] = process;
     rl[0].push_front(0);
+    currentProcess = 0;
 
     rcb.fill(nullptr);
     for (size_t counter = 0; counter < rcb.size(); ++counter)
