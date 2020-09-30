@@ -62,7 +62,7 @@ You need a file that has a series of command sequences, each starting with the `
 | ```to```  | timeout() | Change the current running process. |
 | ```in```  | init() | Initialize/reset this program. |
 
-### Sample Input File
+#### Sample Input File
 ```
 in
 cr 1
