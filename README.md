@@ -39,7 +39,7 @@ Each resource is represented by a data structure called the resource control blo
 * Waitlist: A linked list of processes blocked and their requested amount on the resource r 
 
 ## Running the Application
-This program will take an input file and display a number indicating the ID of the process will be running next. An example of such a file is provided below.
+This program will take an input file and display a number indicating the ID of the process will be running next in a file named ```output.txt```. An example of the input file is provided below.
 
 ### Steps
 1. Clone/download this repository to your local machine
