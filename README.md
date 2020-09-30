@@ -8,14 +8,14 @@ A process can be in one of three states: ready, running, blocked. It typically c
 <img src="https://i.ibb.co/3MX25Vf/ch1img1v2.png" />
 <br />
 
-Each process is represented by a data structure called the process control block (PCB). The PCBs are organized as a fixed-size array, PCB[n], where n is the maximum number of processes that can be created. Each process is uniquely identified by the PCB index:
+Each process is represented by a data structure called the process control block (PCB). The PCBs are organized as a fixed-size array, PCB[n], where n is the maximum number of processes that can be created. In this program, you can create up to 15 processes. Each process is uniquely identified by the PCB index:
 
 <img src="https://i.ibb.co/r6fTVsX/3.png" width="600" />
 <br />
 
 Each PCB only consists of the following fields:
 
-<img src="https://i.ibb.co/y8fVbXF/1.png" width="600" />
+<img src="https://i.ibb.co/XJT1yV6/68747470733a2f2f692e6962622e636f2f793866566258462f312e706e67.png" width="600" />
 <br />
 
 * State: The current state of the process i
@@ -28,7 +28,7 @@ Each PCB only consists of the following fields:
 ### Resource
 Processes may request, acquire, and later release a fixed set of resources. When a process requests a resource that is unavailable, the process becomes blocked.
 
-Each resource is represented by a data structure called the resource control block (RCB). Analogous to the PCBs, the RCBs are organized as a fixed-size array, RCB[m], where m is the number of resource types in the system. Each resource is uniquely identified by the RCB index. Each RCB consists only of the following fields, organized as a structure:
+Each resource is represented by a data structure called the resource control block (RCB). Analogous to the PCBs, the RCBs are organized as a fixed-size array, RCB[m], where m is the number of resource types in the system. In this program, there are only 4 types of resources. Each resource is uniquely identified by the RCB index. Each RCB consists only of the following fields, organized as a structure:
 
 <img src="https://i.ibb.co/pd5x5t1/2.png" width="600" />
 <br />
@@ -39,17 +39,20 @@ Each resource is represented by a data structure called the resource control blo
 * Waitlist: A linked list of processes blocked and their requested amount on the resource r 
 
 ## Running the Application
-These instructions will get you a copy of the project up and running on your local machine for development purposes.
+This program will take an input file and display a number indicating the ID of the process will be running next. An example of such a file is provided below.
 
 ### Steps
 1. Clone/download this repository to your local machine
 2. Navigate to the folder in your console
-3. Type ```make compile``` to compile the program
-4. Type ```./icsospm``` to start the program
-5. Press ```???``` to terminate the program
+3. Prepare a file which contains all your operations (more on later sections)
+4. Type ```make compile``` to compile the program
+5. Type ```./icsospm < commandFile``` to start the program
+    + ```commandFile``` is the directory to your input file
 6. Type ```make clean``` to remove all traces in your device
 
-### Commands
+### Commands/Input File
+You need a file that has a series of command sequences, each starting with the ```in``` command. Individual sequences will be separated by a blank line. 
+
 | Shell Command  | Function | Description |
 | ------------- | ------------- | ------------- |
 | ```cr <p>```  | create() | Make a new process with priority ```p```. |
@@ -58,6 +61,36 @@ These instructions will get you a copy of the project up and running on your loc
 | ```rl <r> <k>```  | release() | Free ```k``` units of resource ```r```. |
 | ```to```  | timeout() | Change the current running process. |
 | ```in```  | init() | Initialize/reset this program. |
+
+<br />
+
+```
+in
+cr 1
+cr 1
+cr 1
+to
+to
+rq 3 1
+to
+rq 3 2
+to
+to
+rl 3 2
+
+in
+cr 1
+cr 2
+cr 2
+cr 1
+rq 1 1
+to
+rq 2 1
+rq 1 1
+rq 2 2
+de 2
+to
+```
 
 ## Acknowledgments
 This project is originally developed for UC Irvine's CS 143B taught by Prof. Lubomir Bic. Its prerequisite is Prof. Nalini Venkatasubramanian's CS 143A. Without their classes, I cannot start this project.

@@ -33,3 +33,7 @@
 
 # VS Code Files
 .vscode
+
+# I/O test cases
+input.txt
+output.txt

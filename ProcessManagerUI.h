@@ -13,7 +13,7 @@ public:
     void getInput();
 
 private:
-    void performAction(std::cmatch& matches);
+    void performAction(std::smatch& matches);
 
 private:
     ProcessManager manager;
