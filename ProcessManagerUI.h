@@ -1,6 +1,7 @@
 #ifndef PROCESS_MANAGER_UI_H
 #define PROCESS_MANAGER_UI_H
 
+#include <fstream>
 #include <iostream>
 #include <regex>
 #include <string>
