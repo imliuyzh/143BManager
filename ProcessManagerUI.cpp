@@ -14,13 +14,17 @@ void ProcessManagerUI::getInput()
     while (std::getline(std::cin, rawInput))
     {
         std::cin >> temp;
-        if (std::regex_match(rawInput, matches, INPUT_PATTERN) == true) 
+        if (rawInput == "")
+        {
+            writeNewline();
+        }
+        else if (std::regex_match(rawInput, matches, INPUT_PATTERN) == true) 
         {
             performAction(matches);
         }
         else
         {
-            std::cout << "-1" << std::endl;
+            writeOutput(-1, false);
         }
     }
 }
@@ -54,17 +58,13 @@ void ProcessManagerUI::performAction(std::smatch& matches)
         {
             manager.release(std::stoi(second), std::stoi(third));
         }
-        else if (original == "")
-        {
-            std::cout << std::endl;
-        }
         else
         {
-            std::cout << "-1" << std::endl;
+            writeOutput(-1, false);
         }
     }
     catch (...)
     {
-        std::cout << "-1" << std::endl;
+        writeOutput(-1, false);
     }
 }

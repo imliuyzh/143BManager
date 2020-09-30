@@ -4,6 +4,7 @@
 #include <fstream>
 #include <string>
 
-void writeOutput(std::string& output, bool createFile=false);
+void writeOutput(int output, bool createFile=false);
+void writeNewline();
 
 #endif

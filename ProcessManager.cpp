@@ -20,6 +20,7 @@ void ProcessManager::init()
         std::shared_ptr<Resource> resource{new Resource(counter)};
         rcb[counter] = resource;
     }
+    writeOutput(0, true);
 }
 
 void ProcessManager::create(int priority)
@@ -52,6 +53,7 @@ void ProcessManager::scheduler()
             break;
         }
     }
+    writeOutput(currentProcess, false);
 }
 
 void ProcessManager::timeout()

@@ -5,6 +5,7 @@
 #include <regex>
 #include <string>
 #include "ProcessManager.h"
+#include "Utilities.h"
 
 class ProcessManagerUI
 {
