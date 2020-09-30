@@ -5,19 +5,18 @@
 #include <memory>
 #include "Process.h"
 #include "Resource.h"
-#include "Utilities.h"
 
 class ProcessManager
 {
 public:
     ProcessManager();
-    void init();
-    void create(int priority);
-    void destroy(int id);
-    void request(int id, int amount);
-    void release(int id, int amount);
-    void scheduler();
-    void timeout();
+    int init();
+    int create(int priority);
+    int destroy(int id);
+    int request(int id, int amount);
+    int release(int id, int amount);
+    int scheduler();
+    int timeout();
 
 private:
     std::array<std::shared_ptr<Process>, 16> pcb;

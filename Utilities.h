@@ -4,7 +4,6 @@
 #include <fstream>
 #include <string>
 
-void writeOutput(int output, bool createFile=false);
-void writeNewline();
+void writeOutput(int output, bool newSequence=false, bool firstSequence=false);
 
 #endif

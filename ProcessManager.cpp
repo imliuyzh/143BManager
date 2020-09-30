@@ -6,7 +6,7 @@ ProcessManager::ProcessManager()
     init();
 }
 
-void ProcessManager::init()
+int ProcessManager::init()
 {
     pcb.fill(nullptr);
     std::shared_ptr<Process> process{new Process(-1, 0)};
@@ -20,10 +20,11 @@ void ProcessManager::init()
         std::shared_ptr<Resource> resource{new Resource(counter)};
         rcb[counter] = resource;
     }
-    writeOutput(0, true);
+
+    return currentProcess;
 }
 
-void ProcessManager::create(int priority)
+int ProcessManager::create(int priority)
 {
     if (size < pcb.max_size())
     {
@@ -31,30 +32,30 @@ void ProcessManager::create(int priority)
         ++size;
         pcb[] = process;
         rl[priority].push_back();
-        scheduler();
+        return scheduler();
     }
     else
     {
-        writeOutput(0, false);
+        return -1;
     }
 }
 
-void ProcessManager::destroy(int id)
+int ProcessManager::destroy(int id)
 {
 
 }
 
-void ProcessManager::request(int id, int amount)
+int ProcessManager::request(int id, int amount)
 {
 
 }
 
-void ProcessManager::release(int id, int amount)
+int ProcessManager::release(int id, int amount)
 {
 
 }
 
-void ProcessManager::scheduler()
+int ProcessManager::scheduler()
 {
     for (size_t counter = 2; counter >= 0; --counter)
     {
@@ -64,13 +65,13 @@ void ProcessManager::scheduler()
             break;
         }
     }
-    writeOutput(currentProcess, false);
+    return currentProcess;
 }
 
-void ProcessManager::timeout()
+int ProcessManager::timeout()
 {
     int priority = pcb[currentProcess]->getPriority(); 
     rl[priority].pop_front();
     rl[priority].push_back(currentProcess);
-    scheduler();
+    return scheduler();
 }

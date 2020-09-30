@@ -1,25 +1,23 @@
 #include "Utilities.h"
 
-void writeOutput(int output, bool createFile=false)
-{
-    std::fstream fileStream;
-    if (createFile)
-    {
-        fileStream.open("output.txt", std::ios::out|std::ios::trunc);
-        fileStream << output;
-    }
-    else
-    {
-        fileStream.open("output.txt", std::ios::out|std::ios::app);
-        fileStream << " " << output;
-    }
-    fileStream.close();
-}
-
-void writeNewline()
+void writeOutput(int output, bool newSequence=false, bool firstSequence=false)
 {
     std::fstream fileStream;
     fileStream.open("output.txt", std::ios::out|std::ios::app);
-    fileStream << std::endl;
+    if (newSequence)
+    {
+        if (firstSequence)
+        {
+            fileStream << output;
+        }
+        else
+        {
+            fileStream << std::endl << output;
+        }
+    }
+    else
+    {
+        fileStream << " " << output;
+    }
     fileStream.close();
 }

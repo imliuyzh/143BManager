@@ -2,7 +2,7 @@
 
 ProcessManagerUI::ProcessManagerUI()
 {
-    manager.init();
+    writeOutput(0, true, true);
 }
 
 void ProcessManagerUI::getInput()
@@ -14,17 +14,14 @@ void ProcessManagerUI::getInput()
     while (std::getline(std::cin, rawInput))
     {
         std::cin >> temp;
-        if (rawInput == "")
-        {
-            writeNewline();
-        }
-        else if (std::regex_match(rawInput, matches, INPUT_PATTERN) == true) 
+        bool result = std::regex_match(rawInput, matches, INPUT_PATTERN);
+        if (result == true) 
         {
             performAction(matches);
         }
-        else
+        else if (rawInput != "" && result == false)
         {
-            writeOutput(-1, false);
+            writeOutput(-1);
         }
     }
 }
@@ -36,11 +33,13 @@ void ProcessManagerUI::performAction(std::smatch& matches)
         std::string original = matches[0].str(), first = matches[1].str(), second = matches[2].str(), third = matches[3].str();
         if (first == "in" && second == "" && third == "")
         {
-            manager.init();
+            int currentProcess = manager.init();
+            writeOutput(currentProcess, true, false);
         }
         else if (first == "to" && second == "" && third == "")
         {
-            manager.timeout();
+            int currentProcess = manager.timeout();
+            writeOutput(currentProcess);
         }
         else if (first == "cr" && second != "" && third == "")
         {
@@ -60,11 +59,11 @@ void ProcessManagerUI::performAction(std::smatch& matches)
         }
         else
         {
-            writeOutput(-1, false);
+            writeOutput(-1);
         }
     }
     catch (...)
     {
-        writeOutput(-1, false);
+        writeOutput(-1);
     }
 }
