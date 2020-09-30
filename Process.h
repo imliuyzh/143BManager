@@ -54,13 +54,13 @@ public:
      * Add the ID of a resource to the list of resources
      * @param id the index of the resource in RCB
      */ 
-    void addResource(int id);
+    void addResource(int id, int amount);
 
     /**
      * Remove the ID of a resource in the list of resources
      * @param id the index of the child process in RCB
      */ 
-    void removeResource(int id);
+    void removeResource(int id, int amount);
 
 private:
     // Can be READY or BLOCKED

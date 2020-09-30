@@ -59,16 +59,16 @@ void Process::removeChildProcess(int id)
  * Add the ID of a resource to the list of resources
  * @param id the index of the resource in RCB
  */ 
-void Process::addResource(int id)
+void Process::addResource(int id, int amount)
 {
-    resources.push_back(id);
+    resources.push_back(std::make_tuple(id, amount));
 }
 
 /**
  * Remove the ID of a resource in the list of resources
  * @param id the index of the child process in RCB
  */ 
-void Process::removeResource(int id)
+void Process::removeResource(int id, int amount)
 {
-    resources.remove(id);
+    resources.remove(std::make_tuple(id, amount));
 }

@@ -1,7 +1,7 @@
 #include "ProcessManager.h"
 
 ProcessManager::ProcessManager()
-    : currentProcess{0}
+    : currentProcess{0}, size{1}, emptySpot{-1}
 {
     init();
 }
@@ -25,7 +25,18 @@ void ProcessManager::init()
 
 void ProcessManager::create(int priority)
 {
-
+    if (size < pcb.max_size())
+    {
+        std::shared_ptr<Process> process{new Process(currentProcess, priority)};
+        ++size;
+        pcb[] = process;
+        rl[priority].push_back();
+        scheduler();
+    }
+    else
+    {
+        writeOutput(0, false);
+    }
 }
 
 void ProcessManager::destroy(int id)
