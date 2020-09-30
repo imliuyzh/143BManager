@@ -46,8 +46,8 @@ This program will take an input file and display a number indicating the ID of t
 2. Navigate to the folder in your console
 3. Prepare a file which contains all your operations (more on later sections)
 4. Type ```make compile``` to compile the program
-5. Type ```./icsospm < commandFile``` to start the program
-    + ```commandFile``` is the directory to your input file
+5. Type ```./icsospm <commandFile>``` to start the program
+    + ```<commandFile>``` is the directory to your input file
 6. Type ```make clean``` to remove all traces in your device
 
 ### Commands/Input File
