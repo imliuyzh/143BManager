@@ -64,6 +64,7 @@ You need a file that has a series of command sequences, each starting with the `
 
 <br />
 
+### Sample Input File
 ```
 in
 cr 1
