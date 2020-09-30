@@ -15,7 +15,7 @@ Each process is represented by a data structure called the process control block
 
 Each PCB only consists of the following fields:
 
-<img src="https://i.ibb.co/XJT1yV6/68747470733a2f2f692e6962622e636f2f793866566258462f312e706e67.png" width="600" />
+<img src="https://i.ibb.co/Tmrv2tN/5.png" width="600" />
 <br />
 
 * State: The current state of the process i

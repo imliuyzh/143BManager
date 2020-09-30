@@ -2,6 +2,7 @@
 #define PROCESS_H
 
 #include <list>
+#include <tuple>
 
 // An enum representing the state of the process. Note that it does not have running since it can implicitly implemented by finding the first process in the running list.
 enum ProcessState { READY, BLOCKED };
@@ -69,9 +70,11 @@ private:
     // PRIORITY - A number from 0-2 indicating the importance of the process (0 is lowest, 2 is highest)
     const int PARENT, PRIORITY;
 
-    // children - A linked list of child processes
-    // resources - A linked list of system resources that the process gathers
-    std::list<int> children, resources;
+    // A linked list of child process IDs
+    std::list<int> children;
+
+    // A linked list of system resources and their amount that the process gathers
+    std::list<std::tuple<int, int>> resources;
 };
 
 #endif
