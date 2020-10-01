@@ -115,5 +115,5 @@ std::list<std::tuple<int, int>> Process::getResources()
  */ 
 void Process::removeResource(int id)
 {
-    resources.remove_if([&](std::tuple<int, int> record) { std::get<0>(record) == id; });
+    resources.remove_if([&](std::tuple<int, int> record) { return std::get<0>(record) == id; });
 }

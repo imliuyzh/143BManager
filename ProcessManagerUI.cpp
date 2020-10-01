@@ -27,7 +27,7 @@ void ProcessManagerUI::getInput()
         }
         else if (rawInput != "" && result == false)
         {
-            writeOutput(-1);
+            writeOutput(-1, false, false);
         }
     }
 }
@@ -49,31 +49,35 @@ void ProcessManagerUI::performAction(std::smatch& matches)
         else if (first == "to" && second == "" && third == "")
         {
             int currentProcess = manager.timeout();
-            writeOutput(currentProcess);
+            writeOutput(currentProcess, false, false);
         }
         else if (first == "cr" && second != "" && third == "")
         {
-            manager.create(std::stoi(second));
+            int currentProcess = manager.create(std::stoi(second));
+            writeOutput(currentProcess, false, false);
         }
         else if (first == "de" && second != "" && third == "")
         {
-            manager.destroy(std::stoi(second));
+            int currentProcess = manager.destroy(std::stoi(second));
+            writeOutput(currentProcess, false, false);
         }
         else if (first == "rq" && second != "" && third != "")
         {
-            manager.request(std::stoi(second), std::stoi(third));
+            int currentProcess = manager.request(std::stoi(second), std::stoi(third));
+            writeOutput(currentProcess, false, false);
         }
         else if (first == "rl" && second != "" && third != "")
         {
-            manager.release(std::stoi(second), std::stoi(third));
+            int currentProcess = manager.release(std::stoi(second), std::stoi(third));
+            writeOutput(currentProcess, false, false);
         }
         else
         {
-            writeOutput(-1);
+            writeOutput(-1, false, false);
         }
     }
     catch (...)
     {
-        writeOutput(-1);
+        writeOutput(-1, false, false);
     }
 }

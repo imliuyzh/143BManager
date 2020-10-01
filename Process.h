@@ -86,7 +86,7 @@ public:
      * Retrieve a list of resources gathered by the process
      * @return a linked list of the resources of the process
      */ 
-    std::list<std::tuple<int, int>> Process::getResources();
+    std::list<std::tuple<int, int>> getResources();
 
 private:
     // Can be READY or BLOCKED

@@ -65,7 +65,7 @@ int ProcessManager::create(int priority)
 
 bool ProcessManager::destroyCheck(int id, int parent)
 {
-    return id >= 0 && id < pcb.max_size() && pcb[parent]->findChildProcess(id) == true;
+    return id >= 0 && id < static_cast<int>(pcb.max_size()) && pcb[parent]->findChildProcess(id) == true;
 }
 
 int ProcessManager::destroy(int id)
@@ -170,7 +170,7 @@ int ProcessManager::release(int id, int amount)
 
 int ProcessManager::scheduler()
 {
-    for (size_t counter = 2; counter >= 0; --counter)
+    for (int counter = 2; counter >= 0; --counter)
     {
         if (rl[counter].size() != 0 && pcb[rl[counter].front()]->getState() == READY)
         {
