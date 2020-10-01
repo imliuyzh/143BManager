@@ -104,13 +104,13 @@ int ProcessManager::destroy(int id)
 
 bool ProcessManager::requestCheck(int currentAmount, int id, int amount)
 {
-    return currentAmount >= amount && id >= 0 && id <= 3;
+    return currentAmount >= amount && id > 0 && id <= 3;
 }
 
 int ProcessManager::request(int id, int amount)
 {
     int currentAmount = rcb[id]->getState();
-    if (currentProcess != 0 && rcb[id]->findProcess(currentProcess) == false)
+    if (currentProcess != 0 && pcb[id]->findResource(id) == false)
     {
         if (requestCheck(currentAmount, id, amount) == true)
         {
