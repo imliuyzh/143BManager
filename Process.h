@@ -12,17 +12,17 @@ class Process
 public:
     Process(int parent, int priority);
     ProcessState getState();
-    void setState(ProcessState state);
     int getParent();
     int getPriority();
-    std::list<int> getChildProcesses();
-    void addChildProcess(int id);
-    bool findChildProcess(int id);
-    void removeChildProcess(int id);
+    std::list<int> getChildren();
+    std::list<std::tuple<int, int>> getResources();
+    void setState(ProcessState state);
+    void addChild(int id);
+    bool findChild(int id);
+    void removeChild(int id);
     void addResource(int id, int amount);
     bool findResource(int id);
-    void removeResource(int id);
-    std::list<std::tuple<int, int>> getResources();
+    void removeResource(int id, int amount);
 
 private:
     ProcessState state;

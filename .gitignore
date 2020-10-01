@@ -35,6 +35,8 @@ icsospm
 # VS Code Files
 .vscode
 
-# I/O test cases
+# Test case files
+sample-input.txt
+sample-output.txt
 input.txt
 output.txt

@@ -25,17 +25,17 @@ int Process::getPriority()
     return PRIORITY;
 }
 
-std::list<int> Process::getChildProcesses()
+std::list<int> Process::getChildren()
 {
     return children;
 }
 
-void Process::addChildProcess(int id)
+void Process::addChild(int id)
 {
     children.push_back(id);
 }
 
-bool Process::findChildProcess(int id)
+bool Process::findChild(int id)
 {
     for (int child : children)
     {
@@ -47,7 +47,7 @@ bool Process::findChildProcess(int id)
     return false;
 }
 
-void Process::removeChildProcess(int id)
+void Process::removeChild(int id)
 {
     children.remove(id);
 }
@@ -74,7 +74,9 @@ std::list<std::tuple<int, int>> Process::getResources()
     return resources;
 }
 
-void Process::removeResource(int id)
+void Process::removeResource(int id, int amount)
 {
-    resources.remove_if([&](std::tuple<int, int> record) { return std::get<0>(record) == id; });
+    resources.remove_if(
+        [&](std::tuple<int, int> record) { return std::get<0>(record) == id && std::get<1>(record) == amount; }
+    );
 }

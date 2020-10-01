@@ -1,7 +1,7 @@
 #include "Resource.h"
 
 Resource::Resource(int id)
-    : state{0}, INVENTORY{(id <= 1) ? 1 : id}
+    : state{(id <= 1) ? 1 : id}, INVENTORY{(id <= 1) ? 1 : id}
 {
 }
 
@@ -20,7 +20,7 @@ int Resource::getInventory() const
     return INVENTORY;
 }
 
-std::list<std::tuple<int, int>> Resource::getProcessWaitlist()
+std::list<std::tuple<int, int>> Resource::getWaitlist()
 {
     return waitlist;
 }
@@ -30,11 +30,11 @@ void Resource::addProcess(int id, int amount)
     waitlist.push_back(std::make_tuple(id, amount));
 }
 
-bool Resource::findProcess(int id)
+bool Resource::findProcess(int id, int amount)
 {
     for (std::tuple<int, int>& record : waitlist)
     {
-        if (std::get<0>(record) == id)
+        if (std::get<0>(record) == id && std::get<1>(record) == amount)
         {
             return true;
         }

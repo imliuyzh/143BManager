@@ -22,13 +22,13 @@ private:
     int findFreeSpace();
     bool createCheck(int freeSpace, int priority);
     bool destroyCheck(int id, int parent);
-    bool requestCheck(int currentAmount, int id, int amount);
-    bool releaseCheck(int id);
+    bool requestCheck(int id, int amount);
+    bool releaseCheck(int id, int amount);
 
 private:
     std::array<std::shared_ptr<Process>, 16> pcb;
     std::array<std::shared_ptr<Resource>, 4> rcb;
-    std::array<std::list<int>, 3> rl;
+    std::array<std::list<int>, 3> rls;
     int currentProcess;
 };
 

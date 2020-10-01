@@ -9,11 +9,11 @@ class Resource
 public:
     explicit Resource(int id);
     int getState();
-    void setState(int state);
     int getInventory() const;
-    std::list<std::tuple<int, int>> getProcessWaitlist();
+    std::list<std::tuple<int, int>> getWaitlist();
+    void setState(int state);
     void addProcess(int id, int amount);
-    bool findProcess(int id);
+    bool findProcess(int id, int amount);
     void removeProcess(int id);
 
 private:
