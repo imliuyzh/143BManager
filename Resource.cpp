@@ -56,6 +56,23 @@ void Resource::addProcess(int id, int amount)
 }
 
 /**
+ * Find if a process is in the waitlist
+ * @param id an int representing the index of the process in the PCB
+ * @return true if the process is in the waitlist, false otherwise
+ */ 
+bool Resource::findProcess(int id)
+{
+    for (std::tuple<int, int>& record : waitlist)
+    {
+        if (std::get<0>(record) == id)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+/**
  * Remove a process in the waitlist
  * @param id an int representing the index of the process in the PCB
  */

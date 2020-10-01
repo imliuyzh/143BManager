@@ -11,8 +11,6 @@ int ProcessManager::init()
     pcb.fill(nullptr);
     std::shared_ptr<Process> process{new Process(-1, 0)};
     pcb[0] = process;
-    rl[0].push_front(0);
-    currentProcess = 0;
 
     rcb.fill(nullptr);
     for (size_t counter = 0; counter < rcb.size(); ++counter)
@@ -25,7 +23,9 @@ int ProcessManager::init()
     {
         processList.clear();
     }
+    rl[0].push_front(0);
 
+    currentProcess = 0;
     return currentProcess;
 }
 
@@ -41,10 +41,15 @@ int ProcessManager::findFreeSpace()
     return -1;
 }
 
+bool ProcessManager::createCheck(int freeSpace, int priority)
+{
+    return freeSpace > 0 && priority > 0 && priority <= 2;
+}
+
 int ProcessManager::create(int priority)
 {
-    int freeSpace = findFreeSpace();
-    if (freeSpace > 0 && priority > 0 && priority <= 2)
+    int freeSpace = findFreeSpace();   
+    if (createCheck(freeSpace, priority) == true)
     {
         std::shared_ptr<Process> process{new Process(currentProcess, priority)};
         pcb[freeSpace] = process;
@@ -58,10 +63,15 @@ int ProcessManager::create(int priority)
     }
 }
 
+bool ProcessManager::destroyCheck(int id, int parent)
+{
+    return id >= 0 && id < pcb.max_size() && pcb[parent]->findChildProcess(id) == true;
+}
+
 int ProcessManager::destroy(int id)
 {
     int parent = pcb[id]->getParent();
-    if (id >= 0 && id < pcb.max_size() && pcb[parent]->findChildProcess(id) == true)
+    if (destroyCheck(id, parent) == true)
     {
         std::list<int> childProcesses = pcb[id]->getChildProcesses();
         for (int childProcess : childProcesses)
@@ -92,45 +102,70 @@ int ProcessManager::destroy(int id)
     }
 }
 
+bool ProcessManager::requestCheck(int currentAmount, int id, int amount)
+{
+    return currentAmount >= amount && id >= 0 && id <= 3;
+}
+
 int ProcessManager::request(int id, int amount)
 {
     int currentAmount = rcb[id]->getState();
-    if (currentAmount >= amount)
+    if (currentProcess != 0 && rcb[id]->findProcess(currentProcess) == false)
     {
-        rcb[id]->setState(currentAmount - amount);
-        pcb[currentProcess]->addResource(id, amount);
-        return currentProcess;
+        if (requestCheck(currentAmount, id, amount) == true)
+        {
+            rcb[id]->setState(currentAmount - amount);
+            pcb[currentProcess]->addResource(id, amount);
+            return currentProcess;
+        }
+        else
+        {
+            pcb[currentProcess]->setState(BLOCKED);
+            rl[pcb[currentProcess]->getPriority()].remove(currentProcess);
+            rcb[id]->addProcess(currentProcess, amount);
+            return scheduler();
+        }
     }
     else
     {
-        pcb[currentProcess]->setState(BLOCKED);
-        rl[pcb[currentProcess]->getPriority()].remove(currentProcess);
-        rcb[id]->addProcess(currentProcess, amount);
-        return scheduler();
+        return -1;
     }
+    
+}
+
+bool ProcessManager::releaseCheck(int id)
+{
+    return currentProcess != 0 && rcb[id]->findProcess(currentProcess) == true && id >= 0 && id <= 3;
 }
 
 int ProcessManager::release(int id, int amount)
 {
-    pcb[currentProcess]->removeResource(id);
-    rcb[id]->setState(rcb[id]->getState() + amount);
-
-    std::list<std::tuple<int, int>> waitlist = rcb[id]->getProcessWaitlist();
-    while (waitlist.empty() == false && rcb[id]->getState() > 0)
+    if (releaseCheck(id) == true)
     {
-        std::tuple<int, int> record = waitlist.front();
-        waitlist.pop_front();
+        pcb[currentProcess]->removeResource(id);
+        rcb[id]->setState(rcb[id]->getState() + amount);
 
-        if (rcb[id]->getState() >= amount)
+        std::list<std::tuple<int, int>> waitlist = rcb[id]->getProcessWaitlist();
+        while (waitlist.empty() == false && rcb[id]->getState() > 0)
         {
-            rcb[id]->setState(rcb[id]->getState() - amount);
-            pcb[std::get<0>(record)]->addResource(id, amount);
-            pcb[std::get<0>(record)]->setState(READY);
-            rcb[id]->removeProcess(std::get<0>(record));
-            rl[pcb[std::get<0>(record)]->getPriority()].push_back(std::get<0>(record));
+            std::tuple<int, int> record = waitlist.front();
+            waitlist.pop_front();
+
+            if (rcb[id]->getState() >= amount)
+            {
+                rcb[id]->setState(rcb[id]->getState() - amount);
+                pcb[std::get<0>(record)]->addResource(id, amount);
+                pcb[std::get<0>(record)]->setState(READY);
+                rcb[id]->removeProcess(std::get<0>(record));
+                rl[pcb[std::get<0>(record)]->getPriority()].push_back(std::get<0>(record));
+            }
         }
+        return scheduler();
     }
-    return scheduler();
+    else
+    {
+        return -1;
+    }
 }
 
 int ProcessManager::scheduler()

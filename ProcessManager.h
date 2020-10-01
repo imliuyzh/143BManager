@@ -20,6 +20,10 @@ public:
 
 private:
     int findFreeSpace();
+    bool createCheck(int freeSpace, int priority);
+    bool destroyCheck(int id, int parent);
+    bool requestCheck(int currentAmount, int id, int amount);
+    bool releaseCheck(int id);
 
 private:
     std::array<std::shared_ptr<Process>, 16> pcb;

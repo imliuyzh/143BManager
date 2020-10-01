@@ -48,6 +48,13 @@ public:
     void addProcess(int id, int amount);
 
     /**
+     * Find if a process is in the waitlist
+     * @param id an int representing the index of the process in the PCB
+     * @return true if the process is in the waitlist, false otherwise
+     */ 
+    bool findProcess(int id);
+    
+    /**
      * Remove a process in the waitlist
      * @param id an int representing the index of the process in the PCB
      */
