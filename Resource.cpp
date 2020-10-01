@@ -37,6 +37,15 @@ int Resource::getInventory() const
 }
 
 /**
+ * Retrieve the list where every process in the list is waiting for this resource
+ * @return a list of processes waiting for the resource
+ */ 
+std::list<std::tuple<int, int>> Resource::getProcessWaitlist()
+{
+    return waitlist;
+}
+
+/**
  * Add a process in the waitlist
  * @param id an int representing the index of the process in the PCB
  * @param amount an int for how many units does the process needs
@@ -49,9 +58,8 @@ void Resource::addProcess(int id, int amount)
 /**
  * Remove a process in the waitlist
  * @param id an int representing the index of the process in the PCB
- * @param amount an int for how many units does the process needs
  */
-void Resource::removeProcess(int id, int amount)
+void Resource::removeProcess(int id)
 {
-    waitlist.remove(std::make_tuple(id, amount));
+    waitlist.remove_if([&](std::tuple<int, int> record) { return std::get<0>(record) == id; });
 }

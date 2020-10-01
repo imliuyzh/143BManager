@@ -27,22 +27,40 @@ public:
     ProcessState getState();
 
     /**
+     * Changed the state of process to READY/BLOCKED
+     * @param state READY or BLOCKED
+     */ 
+    void setState(ProcessState state);
+
+    /**
      * Give the index of the parent process in the PCB
      * @return the index of the parent process in the PCB
      */ 
-    int getParent() const;
+    int getParent();
 
     /**
      * Give the importance of the process
      * @return an int from 0-2
      */
-    int getPriority() const;
+    int getPriority();
+
+    /**
+     * Get a list of child processes
+     * @return a linked list of the child processes in the process
+     */ 
+    std::list<int> getChildProcesses();
 
     /**
      * Add the ID of a process to the list of child process
      * @param id the index of the child process in PCB
      */ 
     void addChildProcess(int id);
+
+    /**
+     * See if the specified process is one of the child processes
+     * @return true if the child process exists, false otherwise
+     */
+    bool findChildProcess(int id); 
 
     /**
      * Remove the ID of a process in the list of child process
@@ -60,7 +78,13 @@ public:
      * Remove the ID of a resource in the list of resources
      * @param id the index of the child process in RCB
      */ 
-    void removeResource(int id, int amount);
+    void removeResource(int id);
+
+    /**
+     * Retrieve a list of resources gathered by the process
+     * @return a linked list of the resources of the process
+     */ 
+    std::list<std::tuple<int, int>> Process::getResources();
 
 private:
     // Can be READY or BLOCKED

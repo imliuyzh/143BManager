@@ -19,10 +19,13 @@ public:
     int timeout();
 
 private:
+    int findFreeSpace();
+
+private:
     std::array<std::shared_ptr<Process>, 16> pcb;
     std::array<std::shared_ptr<Resource>, 4> rcb;
     std::array<std::list<int>, 3> rl;
-    int currentProcess, size, emptySpot;
+    int currentProcess;
 };
 
 #endif
