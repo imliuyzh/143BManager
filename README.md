@@ -41,6 +41,11 @@ Each resource is represented by a data structure called the resource control blo
 ## Running the Application
 This program will take an input file and display a number indicating the ID of the process will be running next in a file named ```output.txt```. An example of the input file is provided below.
 
+### Built With
+Please install these applications if you want to compile the program yourself:
+* g++ (v8.0+)
+* Valgrind
+
 ### Steps
 1. Clone/download this repository to your local machine
 2. Navigate to the folder in your console
