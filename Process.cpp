@@ -66,6 +66,7 @@ void Process::addChildProcess(int id)
 
 /**
  * See if the specified process is one of the child processes
+ * @param id the index of the child process in PCB
  * @return true if the child process exists, false otherwise
  */
 bool Process::findChildProcess(int id)
@@ -92,6 +93,7 @@ void Process::removeChildProcess(int id)
 /**
  * Add the ID of a resource to the list of resources
  * @param id the index of the resource in RCB
+ * @param amount how many units of the resource does the process need
  */ 
 void Process::addResource(int id, int amount)
 {
