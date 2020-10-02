@@ -54,19 +54,21 @@ void Process::removeChild(int id)
 
 void Process::addResource(int id, int amount)
 {
-    resources.push_back(std::make_tuple(id, amount));
+    int newAmount = findResource(id) + amount;
+    resources.remove_if([&](std::tuple<int, int> record) { return std::get<0>(record) == id; });
+    resources.push_back(std::make_tuple(id, newAmount));
 }
 
-bool Process::findResource(int id)
+int Process::findResource(int id)
 {
     for (std::tuple<int, int>& resource : resources)
     {
         if (std::get<0>(resource) == id)
         {
-            return true;
+            return std::get<1>(resource);
         }
     }
-    return false;
+    return 0;
 }
  
 std::list<std::tuple<int, int>> Process::getResources()

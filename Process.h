@@ -21,7 +21,7 @@ public:
     bool findChild(int id);
     void removeChild(int id);
     void addResource(int id, int amount);
-    bool findResource(int id);
+    int findResource(int id);
     void removeResource(int id, int amount);
 
 private:

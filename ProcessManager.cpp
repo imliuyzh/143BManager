@@ -62,7 +62,8 @@ int ProcessManager::create(int priority)
 
 bool ProcessManager::destroyCheck(int id, int parent)
 {
-    return id > 0 && id < static_cast<int>(pcb.max_size()) && pcb[id] != nullptr && pcb[parent]->findChild(id) == true;
+    return id > 0 && id < static_cast<int>(pcb.max_size())
+        && pcb[id] != nullptr && pcb[parent]->findChild(id) == true;
 }
 
 int ProcessManager::destroy(int id)
@@ -98,7 +99,8 @@ int ProcessManager::destroy(int id)
 
 bool ProcessManager::requestCheck(int id, int amount)
 {
-    return currentProcess > 0 && id >= 0 && id <= 3 && amount > 0 && amount <= rcb[id]->getInventory();
+    return currentProcess > 0 && id >= 0 && id <= 3
+        && amount > 0 && (pcb[currentProcess]->findResource(id) + amount) <= rcb[id]->getInventory();
 }
 
 int ProcessManager::request(int id, int amount)
@@ -125,7 +127,9 @@ int ProcessManager::request(int id, int amount)
 
 bool ProcessManager::releaseCheck(int id, int amount)
 {
-    return currentProcess != 0 && id >= 0 && id <= 3 && pcb[currentProcess]->findResource(id) == true && amount > 0 && amount <= rcb[id]->getInventory();
+    int currentAmount = pcb[currentProcess]->findResource(id);
+    return currentProcess > 0 && id >= 0 && id <= 3
+        && amount > 0 && amount <= currentAmount && amount <= rcb[id]->getInventory();
 }
 
 int ProcessManager::release(int id, int amount)
