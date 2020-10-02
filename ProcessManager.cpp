@@ -88,7 +88,7 @@ int ProcessManager::destroy(int id)
         std::list<std::tuple<int, int>> resources = pcb[id]->getResources();
         for (std::tuple<int, int> resource : resources)
         {
-            release(std::get<0>(resource), std::get<1>(resource));
+            release(std::get<0>(resource), std::get<1>(resource), id);
         }
 
         pcb[id] = nullptr;
@@ -125,18 +125,19 @@ int ProcessManager::request(int id, int amount)
     return -1;
 }
 
-bool ProcessManager::releaseCheck(int id, int amount)
+// Can a process' state set to BLOCKED if its need cannot be met after requesting the resource for the second time?
+bool ProcessManager::releaseCheck(int id, int amount, int process)
 {
-    int currentAmount = pcb[currentProcess]->findResource(id);
-    return currentProcess > 0 && id >= 0 && id <= 3
+    int currentAmount = pcb[process]->findResource(id);
+    return process > 0 && id >= 0 && id <= 3
         && amount > 0 && amount <= currentAmount && amount <= rcb[id]->getInventory();
 }
 
-int ProcessManager::release(int id, int amount)
+int ProcessManager::release(int id, int amount, int process=currentProcess)
 {
-    if (releaseCheck(id, amount) == true)
+    if (releaseCheck(id, amount, process) == true)
     {
-        pcb[currentProcess]->removeResource(id, amount);
+        pcb[process]->removeResource(id, amount);
         rcb[id]->setState(rcb[id]->getState() + amount);
 
         std::list<std::tuple<int, int>> waitlist = rcb[id]->getWaitlist();
