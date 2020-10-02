@@ -21,7 +21,7 @@ public:
 private:
     int findFreeSpace();
     bool createCheck(int freeSpace, int priority);
-    bool destroyCheck(int id, int parent);
+    bool destroyCheck(int id);
     bool requestCheck(int id, int amount);
     bool releaseCheck(int id, int amount, int process=-1);
 
