@@ -78,7 +78,16 @@ std::list<std::tuple<int, int>> Process::getResources()
 
 void Process::removeResource(int id, int amount)
 {
+    for (std::tuple<int, int>& resource : resources)
+    {
+        if (std::get<0>(resource) == id)
+        {
+            std::get<1>(resource) -= amount;
+            break;
+        }
+    }
+
     resources.remove_if(
-        [&](std::tuple<int, int> record) { return std::get<0>(record) == id && std::get<1>(record) == amount; }
+        [&](std::tuple<int, int> record) { return std::get<0>(record) == id && std::get<1>(record) - amount == 0; }
     );
 }

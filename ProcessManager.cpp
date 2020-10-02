@@ -133,11 +133,12 @@ bool ProcessManager::releaseCheck(int id, int amount, int process)
         && amount > 0 && amount <= currentAmount && amount <= rcb[id]->getInventory();
 }
 
-int ProcessManager::release(int id, int amount, int process=currentProcess)
+int ProcessManager::release(int id, int amount, int process=-1)
 {
-    if (releaseCheck(id, amount, process) == true)
+    int targetProcess = (process == -1) ? currentProcess : process;
+    if (releaseCheck(id, amount, targetProcess) == true)
     {
-        pcb[process]->removeResource(id, amount);
+        pcb[targetProcess]->removeResource(id, amount);
         rcb[id]->setState(rcb[id]->getState() + amount);
 
         std::list<std::tuple<int, int>> waitlist = rcb[id]->getWaitlist();
@@ -154,6 +155,11 @@ int ProcessManager::release(int id, int amount, int process=currentProcess)
                 rcb[id]->removeProcess(std::get<0>(record));
                 rls[pcb[std::get<0>(record)]->getPriority()].push_back(std::get<0>(record));
             }
+            else
+            {
+                break;
+            }
+            
         }
         return scheduler();
     }
