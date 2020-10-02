@@ -70,14 +70,13 @@ int ProcessManager::destroy(int id)
 {
     if (destroyCheck(id) == true)
     {
-        int parent = pcb[id]->getParent();
         std::list<int> childProcesses = pcb[id]->getChildren();
         for (int childProcess : childProcesses)
         {
             destroy(childProcess);
         }
 
-        pcb[parent]->removeChild(id);
+        pcb[pcb[id]->getParent()]->removeChild(id);
 
         rls[pcb[id]->getPriority()].remove(id);
         for (std::shared_ptr<Resource> resourceBlock : rcb)

@@ -43,7 +43,7 @@ This program will take an input file and display a number indicating the ID of t
 
 ### Built With
 Please install these applications if you want to compile the program yourself:
-* g++ (v8.0+)
+* g++
 * Valgrind
 
 ### Steps
