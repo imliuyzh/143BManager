@@ -14,6 +14,8 @@ ProcessManagerUI::ProcessManagerUI()
 void ProcessManagerUI::getInput()
 {
     std::string rawInput;
+    std::getline(std::cin, rawInput);
+
     std::smatch matches;
     const std::regex INPUT_PATTERN("^(cr|de|rq|rl|to|in){1} {0,1}([0-9]*) {0,1}([0-9]*)\r*$");
 
@@ -24,7 +26,7 @@ void ProcessManagerUI::getInput()
         {
             performAction(matches);
         }
-        else if (rawInput != "" && result == false)
+        else if ((rawInput != "" && rawInput != "\r") && result == false)
         {
             writeOutput(-1, false, false);
         }

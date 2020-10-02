@@ -34,6 +34,7 @@ icsospm
 
 # Core dump files
 core.*
+vgcore.*
 
 # VS Code Files
 .vscode

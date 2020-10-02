@@ -7,4 +7,4 @@ compile: main.cpp Process.cpp ProcessManager.cpp ProcessManagerUI.cpp Resource.c
 
 clean:
 	echo ----------------removing executable program--------------------
-	/bin/rm icsospm core.*
+	/bin/rm icsospm core.* vgcore.*

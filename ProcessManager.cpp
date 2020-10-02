@@ -19,9 +19,9 @@ int ProcessManager::init()
         rcb[counter] = resource;
     }
 
-    for (std::list<int> rl : rls)
+    for (size_t counter = 0; counter < rls.size(); ++counter)
     {
-        rl.clear();
+        rls[counter].clear();
     }
     rls[0].push_front(0);
 
@@ -62,10 +62,9 @@ int ProcessManager::create(int priority)
 
 bool ProcessManager::destroyCheck(int id, int parent)
 {
-    return id >= 0 && id < static_cast<int>(pcb.max_size()) && pcb[id] != nullptr && pcb[parent]->findChild(id) == true;
+    return id > 0 && id < static_cast<int>(pcb.max_size()) && pcb[id] != nullptr && pcb[parent]->findChild(id) == true;
 }
 
-// destroy(0)?
 int ProcessManager::destroy(int id)
 {
     int parent = pcb[id]->getParent();
@@ -99,10 +98,9 @@ int ProcessManager::destroy(int id)
 
 bool ProcessManager::requestCheck(int id, int amount)
 {
-    return currentProcess != 0 && id > 0 && id <= 3 && pcb[id]->findResource(id) == false && amount > 0 && amount <= rcb[id]->getInventory();
+    return currentProcess > 0 && id >= 0 && id <= 3 && amount > 0 && amount <= rcb[id]->getInventory();
 }
 
-// Request more even if it got some?
 int ProcessManager::request(int id, int amount)
 {
     if (requestCheck(id, amount) == true)
