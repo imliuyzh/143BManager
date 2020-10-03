@@ -36,7 +36,7 @@ icsospm
 core.*
 vgcore.*
 
-# VS Code Files
+# VS Code files
 .vscode
 
 # Test case files
@@ -44,3 +44,6 @@ sample-input.txt
 sample-output.txt
 input.txt
 output.txt
+
+# README for grading
+README.txt
