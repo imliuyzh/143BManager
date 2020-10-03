@@ -1,16 +1,11 @@
 #include "ProcessManagerUI.h"
 
-/**
- * Create a ProcessManagerUI object
- */ 
+// Please read the comments in the header file to understand the functionalities of each method.
 ProcessManagerUI::ProcessManagerUI()
 {
     writeOutput(0, true, true);
 }
 
-/**
- * Parse the commands from the file
- */ 
 void ProcessManagerUI::getInput()
 {
     std::string rawInput;
@@ -33,10 +28,6 @@ void ProcessManagerUI::getInput()
     }
 }
 
-/**
- * Call the methods in the manager variable depending on the commands
- * @param matches an object containing the initial string and matched phrases
- */ 
 void ProcessManagerUI::performAction(std::smatch& matches)
 {
     try

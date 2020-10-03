@@ -1,5 +1,6 @@
 #include "Process.h"
 
+// Please read the comments in the header file to understand the functionalities of each method.
 Process::Process(int parent, int priority)
     : state{READY}, PARENT{parent}, PRIORITY{priority}
 {

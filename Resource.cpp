@@ -1,5 +1,6 @@
 #include "Resource.h"
 
+// Please read the comments in the header file to understand the functionalities of each method.
 Resource::Resource(int id)
     : state{(id <= 1) ? 1 : id}, INVENTORY{(id <= 1) ? 1 : id}
 {

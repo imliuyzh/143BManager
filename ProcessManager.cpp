@@ -1,5 +1,6 @@
 #include "ProcessManager.h"
 
+// Please read the comments in the header file to understand the functionalities of each method.
 ProcessManager::ProcessManager()
     : currentProcess{0}
 {
