@@ -23,7 +23,7 @@ private:
     bool createCheck(int freeSpace, int priority);
     bool destroyCheck(int id);
     bool requestCheck(int id, int amount);
-    bool releaseCheck(int id, int amount, int process=-1);
+    bool releaseCheck(int id, int amount, int process);
 
 private:
     std::array<std::shared_ptr<Process>, 16> pcb;
