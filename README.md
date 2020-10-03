@@ -51,7 +51,7 @@ Please install these applications if you want to compile the program yourself:
 2. Navigate to the folder in your console
 3. Prepare a file which contains all your operations (more on later sections)
 4. Type ```make compile``` to compile the program
-5. Type ```./icsospm < {commandFile}``` to start the program (no brackets)
+5. Type ```./icsospm {commandFile}``` to start the program (no brackets)
     + ```{commandFile}``` is the directory to your input file
 6. Type ```make clean``` to remove all traces in your device
 

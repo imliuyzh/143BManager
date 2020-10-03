@@ -6,15 +6,18 @@ ProcessManagerUI::ProcessManagerUI()
     writeOutput(0, true, true);
 }
 
-void ProcessManagerUI::getInput()
+void ProcessManagerUI::getInput(char* filePath)
 {
+    std::fstream fileStream;
+    fileStream.open(filePath, std::ios::in);
+    
     std::string rawInput;
-    std::getline(std::cin, rawInput);
+    std::getline(fileStream, rawInput);
 
     std::smatch matches;
     const std::regex INPUT_PATTERN("^(cr|de|rq|rl|to|in){1} {0,1}([0-9]*) {0,1}([0-9]*)\r*$");
 
-    while (std::getline(std::cin, rawInput))
+    while (std::getline(fileStream, rawInput))
     {
         bool result = std::regex_match(rawInput, matches, INPUT_PATTERN);
         if (result == true) 
@@ -26,6 +29,8 @@ void ProcessManagerUI::getInput()
             writeOutput(-1, false, false);
         }
     }
+    
+    fileStream.close();
 }
 
 void ProcessManagerUI::performAction(std::smatch& matches)
