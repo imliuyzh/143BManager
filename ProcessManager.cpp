@@ -98,8 +98,8 @@ int ProcessManager::destroy(int id)
 
 bool ProcessManager::requestCheck(int id, int amount)
 {
-    return currentProcess > 0 && id >= 0 && id <= 3
-        && amount > 0 && (pcb[currentProcess]->findResource(id) + amount) <= rcb[id]->getInventory();
+    return currentProcess > 0 && id >= 0 && id <= 3 && amount > 0
+        && (pcb[currentProcess]->findResource(id) + amount) <= rcb[id]->getInventory();
 }
 
 int ProcessManager::request(int id, int amount)
@@ -124,12 +124,10 @@ int ProcessManager::request(int id, int amount)
     return -1;
 }
 
-// Can a process' state set to BLOCKED if its need cannot be met after requesting the resource for the second time?
 bool ProcessManager::releaseCheck(int id, int amount, int process)
 {
     int currentAmount = pcb[process]->findResource(id);
-    return process > 0 && id >= 0 && id <= 3
-        && amount > 0 && amount <= currentAmount && amount <= rcb[id]->getInventory();
+    return process > 0 && id >= 0 && id <= 3 && amount > 0 && amount <= currentAmount;
 }
 
 int ProcessManager::release(int id, int amount, int process=-1)
