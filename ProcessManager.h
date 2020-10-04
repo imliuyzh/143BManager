@@ -54,7 +54,7 @@ public:
      * @param process -1 for current process, a number greater than 0 for others
      * @return the ID of the next process that will run
      */
-    int release(int id, int amount, int process);
+    int release(int id, int amount, int process = -1);
     
     /**
      * Pick a new process to run. The one with a higher priority will run first.

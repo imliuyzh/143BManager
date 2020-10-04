@@ -132,7 +132,7 @@ bool ProcessManager::releaseCheck(int id, int amount, int process)
     return process > 0 && id >= 0 && id <= 3 && amount > 0 && amount <= currentAmount;
 }
 
-int ProcessManager::release(int id, int amount, int process=-1)
+int ProcessManager::release(int id, int amount, int process)
 {
     int targetProcess = (process == -1) ? currentProcess : process;
     if (releaseCheck(id, amount, targetProcess) == true)

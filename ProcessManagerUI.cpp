@@ -65,7 +65,7 @@ void ProcessManagerUI::performAction(std::smatch& matches)
         }
         else if (first == "rl" && second != "" && third != "")
         {
-            int currentProcess = manager.release(std::stoi(second), std::stoi(third), -1);
+            int currentProcess = manager.release(std::stoi(second), std::stoi(third));
             writeOutput(currentProcess, false, false);
         }
         else
