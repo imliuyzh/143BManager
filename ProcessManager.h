@@ -33,9 +33,11 @@ public:
     /**
      * Destroy a process and all its child processes.
      * @param id the index of the process in the PCB
+     * @param parent the index of the parent process for the one in the parameter id (-1 is for the current process)
+     * 
      * @return the ID of the next process that will run
      */
-    int destroy(int id);
+    int destroy(int id, int parent = -1);
     
     /**
      * Request a resource for the current process.
@@ -84,9 +86,10 @@ private:
     /**
      * Check if the parameters for destroy() are legal.
      * @param id the index of the process in the PCB
+     * @param parent the index of the parent process for the one in the parameter id
      * @return true if all the parameters are correct, false otherwise
      */
-    bool destroyCheck(int id);
+    bool destroyCheck(int id, int parent);
     
     /**
      * Check if the parameters for request() are legal.

@@ -10,7 +10,7 @@ ProcessManager::ProcessManager()
 int ProcessManager::init()
 {
     pcb.fill(nullptr);
-    std::shared_ptr<Process> process{new Process(-1, 0)};
+    std::shared_ptr<Process> process{new Process(0, 0)};
     pcb[0] = process;
 
     rcb.fill(nullptr);
@@ -61,20 +61,21 @@ int ProcessManager::create(int priority)
     return -1;
 }
 
-bool ProcessManager::destroyCheck(int id)
+bool ProcessManager::destroyCheck(int id, int parent)
 {
-    return id > 0 && id < static_cast<int>(pcb.max_size())
-        && pcb[id] != nullptr && pcb[pcb[id]->getParent()]->findChild(id) == true;
+    return id > 0 && id < static_cast<int>(pcb.max_size()) && pcb[id] != nullptr
+        && (id == parent) ? true : pcb[parent]->findChild(id) == true;
 }
 
-int ProcessManager::destroy(int id)
+int ProcessManager::destroy(int id, int parent)
 {
-    if (destroyCheck(id) == true)
+    int processParent = (parent == -1) ? currentProcess : parent;
+    if (destroyCheck(id, processParent) == true)
     {
         std::list<int> childProcesses = pcb[id]->getChildren();
         for (int childProcess : childProcesses)
         {
-            destroy(childProcess);
+            destroy(childProcess, id);
         }
 
         pcb[pcb[id]->getParent()]->removeChild(id);
