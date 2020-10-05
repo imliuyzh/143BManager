@@ -1,4 +1,4 @@
-# [ICSOSProcessManager](https://github.com/imliuyzh/ICSOSProcessManager)
+# [ICSOS-Process-Manager](https://github.com/imliuyzh/ICSOS-Process-Manager)
 A simple process and resource manager provides the basic operations invoked by processes to create and destroy processes, and to request and release resources. A manually invoked timeout function mimics the behavior of preemptive scheduling. 
 
 ## Background
