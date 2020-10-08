@@ -61,10 +61,23 @@ int ProcessManager::create(int priority)
     return -1;
 }
 
+bool ProcessManager::checkChild(int id, int parent)
+{
+    std::list<int> childrenList = pcb[parent]->getChildren();
+    for (int child : childrenList)
+    {
+        if (id == child || checkChild(id, child) == true)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
 bool ProcessManager::destroyCheck(int id, int parent)
 {
     return id > 0 && id < static_cast<int>(pcb.max_size()) && pcb[id] != nullptr
-        && (id == parent) ? true : pcb[parent]->findChild(id) == true;
+        && (id == parent) ? true : checkChild(id, parent);
 }
 
 int ProcessManager::destroy(int id, int parent)

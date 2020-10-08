@@ -92,6 +92,14 @@ private:
     bool destroyCheck(int id, int parent);
     
     /**
+     * Check if the process is a child of a process.
+     * @param id the index of the process in the PCB
+     * @param parent the index of the parent process for the one in the parameter id
+     * @return true if the process in the parameter id is a child process, false otherwise
+     */
+    bool checkChild(int id, int parent);
+    
+    /**
      * Check if the parameters for request() are legal.
      * @param id the index of the resource in the RCB
      * @param amount the amount that the process want to get
