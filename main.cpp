@@ -1,7 +1,7 @@
 #include "ProcessManagerUI.h"
 
 /**
- * Create a REPL to parse commands from the input file.
+ * Create a ProcessManagerUI object to parse commands from the input file.
  * @param argc the total number of arguments provided to the program
  * @param argv an array of string listing the arguments for this program
  * @return 0
